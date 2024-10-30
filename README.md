@@ -46,7 +46,7 @@ Repositório padrão para projetos Backend usando Golang.
 ```shell
 #Configurações para o Docker (local)
 DB_URL=mongodb://mongo:27017
-DB_NAME=oc-energia
+DB_NAME=backend-golang
 DB_USERNAME=root
 DB_PASSWORD=root
 
