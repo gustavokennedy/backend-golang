@@ -35,7 +35,7 @@ func main() {
 
   // Sentry
 	err = sentry.Init(sentry.ClientOptions{
-		Dsn:              "https://14e537b912b04f53848b3299d5eab886@o4504888820695040.ingest.sentry.io/4505365111570432",
+		Dsn:              "",
 		TracesSampleRate: 1.0,
 	})
 	if err != nil {
