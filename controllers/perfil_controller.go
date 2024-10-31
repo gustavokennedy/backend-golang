@@ -85,13 +85,13 @@ func (uc *PerfilController) ListarTodosPerfis(w http.ResponseWriter, r *http.Req
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(perfis)
 }
 
@@ -107,13 +107,13 @@ func (uc *PerfilController) ListarPerfilPorID(w http.ResponseWriter, r *http.Req
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(perfil)
 }
 
@@ -132,7 +132,7 @@ func (uc *PerfilController) EditarPerfil(w http.ResponseWriter, r *http.Request)
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return
@@ -147,7 +147,7 @@ func (uc *PerfilController) EditarPerfil(w http.ResponseWriter, r *http.Request)
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return
@@ -162,7 +162,7 @@ func (uc *PerfilController) EditarPerfil(w http.ResponseWriter, r *http.Request)
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return
@@ -180,7 +180,7 @@ func (uc *PerfilController) EditarPerfil(w http.ResponseWriter, r *http.Request)
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return
@@ -190,7 +190,7 @@ func (uc *PerfilController) EditarPerfil(w http.ResponseWriter, r *http.Request)
 		Message: "Perfil atualizado com sucesso!",
 	}
 
-	w.Header().Set("Content-Type", "application/json") // Faz listagem em JSONN
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(Resposta)
 }
@@ -203,13 +203,12 @@ func (uc *PerfilController) DeletarPerfil(w http.ResponseWriter, r *http.Request
 	err := uc.repo.DeletarPerfil(id)
 	if err != nil {
 		if err.Error() == "Perfil não encontrado" {
-			// Perfil não encontrado, retornar mensagem em JSON
 			RespostaComErro := common.RespostaComErro{
 				Error:   "Perfil não encontrado!",
 				Message: err.Error(),
 			}
 
-			w.Header().Set("Content-Type", "application/json") // Faz listagem em JSON
+			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(RespostaComErro)
 			return
@@ -221,7 +220,7 @@ func (uc *PerfilController) DeletarPerfil(w http.ResponseWriter, r *http.Request
 			Message: err.Error(),
 		}
 
-		w.Header().Set("Content-Type", "application/json") // Faz listagem em JSON
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(RespostaComErro)
 		return

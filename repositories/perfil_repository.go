@@ -1,10 +1,10 @@
 package repositories
 
 import (
+	"backend-golang/models"
 	"context"
 	"fmt"
 	"log"
-	"backend-golang/models"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -48,7 +48,7 @@ func (ur *PerfilRepositorio) CriarPerfil(perfil *models.Perfil) (*models.Perfil,
 		log.Println(err)
 		return nil, err
 	}
-
+	log.Println("Perfil criado com sucesso!")
 	return perfil, nil
 }
 
