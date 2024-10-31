@@ -1,6 +1,9 @@
-FROM golang:1.18 AS builder
+FROM golang:latest AS builder
 
 WORKDIR /app
+
+# Define a flag para o build
+ENV GOFLAGS="-buildvcs=false"
 
 COPY go.mod go.sum ./
 RUN go mod download
@@ -16,4 +19,4 @@ VOLUME ["/app"]
 EXPOSE 8080
 
 # Reinicializa o servidor com gin
-ENTRYPOINT ["gin", "-i", "run", "--build-args=-buildvcs=false"]
+ENTRYPOINT ["gin", "-i", "run"]

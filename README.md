@@ -45,6 +45,7 @@ Repositório padrão para projetos Backend usando Golang.
 .env
 ```shell
 #Configurações para o Docker (local)
+AMBIENTE=dev
 DB_URL=mongodb://mongo:27017
 DB_NAME=backend-golang
 DB_USERNAME=root

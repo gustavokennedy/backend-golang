@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	// "backend-golang/routes"
+	"backend-golang/routes"
 	// "backend-golang/seeders"
 
 	"github.com/getsentry/sentry-go"
@@ -45,7 +45,7 @@ func main() {
 	//sentry.CaptureMessage(Funcionando!")
   
 	// Cria um roteador principal com Mux
-	// router := routes.ConfiguraRotas()
+	router := routes.ConfiguraRotas()
 
 	// Configuração personalizada do CORS
 	cors := handlers.CORS(
@@ -62,7 +62,7 @@ func main() {
 	// Inicia o servidor com CORS
 	// Precisa incluir router no cors cors(router)
 	log.Printf("Servidor rodando em http://localhost%s\n", port)
-	if err := http.ListenAndServe(port, cors(http.DefaultServeMux)); err != nil {
+	if err := http.ListenAndServe(port, cors(router)); err != nil {
 		log.Printf("Erro ao iniciar servidor: %v\n", err)
 	}
 }
