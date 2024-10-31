@@ -1,13 +1,3 @@
-// /*
-// ______      ________ _____            _      _        _____ _      ____  _    _ _____
-// / __ \ \    / /  ____|  __ \     /\   | |    | |      / ____| |    / __ \| |  | |  __ \
-// | |  | \ \  / /| |__  | |__) |   /  \  | |    | |     | |    | |   | |  | | |  | | |  | |
-// | |  | |\ \/ / |  __| |  _  /   / /\ \ | |    | |     | |    | |   | |  | | |  | | |  | |
-// | |__| | \  /  | |____| | \ \  / ____ \| |____| |____ | |____| |___| |__| | |__| | |__| |
-// \____/   \/   |______|_|  \_\/_/    \_\______|______(_)_____|______\____/ \____/|_____/
-// overall.cloud
-// */
-
 package middlewares
 
 import (
@@ -39,6 +29,7 @@ func NovoEmailMiddleware() *EmailMiddleware {
 }
 
 func (em *EmailMiddleware) SendEmail(to, subject, body string) error {
+
 	// Configurar o objeto de mensagem de email
 	msg := gomail.NewMessage()
 	msg.SetHeader("From", em.SMTPUsername)
@@ -53,7 +44,7 @@ func (em *EmailMiddleware) SendEmail(to, subject, body string) error {
 	if err := d.DialAndSend(msg); err != nil {
 		return err
 	}
-	// Colocar usuário que enviou no log
-	log.Println("E-mail enviado!")
+	log.Println("E-mail enviado com sucesso!")
+	log.Println("E-mail enviado por", em.SMTPUsername, "para", to)
 	return nil
 }

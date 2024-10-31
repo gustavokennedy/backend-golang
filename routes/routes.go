@@ -18,7 +18,7 @@ import (
 type EmailRequest struct {
 	To      string `json:"to"`
 	Subject string `json:"subject"`
-	Content string `json:"content"`
+	Body    string `json:"body"`
 }
 
 type Response struct {
@@ -50,7 +50,7 @@ func EnviarEmailHandler(w http.ResponseWriter, r *http.Request) {
 	emailMiddleware := middlewares.NovoEmailMiddleware()
 
 	// Enviar o email
-	err = emailMiddleware.SendEmail(emailReq.To, emailReq.Subject, emailReq.Content)
+	err = emailMiddleware.SendEmail(emailReq.To, emailReq.Subject, emailReq.Body)
 	if err != nil {
 		log.Println("Erro ao enviar o email:", err)
 		http.Error(w, "Erro ao enviar o email", http.StatusInternalServerError)
