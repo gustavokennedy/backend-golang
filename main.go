@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
-	"backend-golang/routes"
-	"backend-golang/seeders"
+	// "backend-golang/routes"
+	// "backend-golang/seeders"
 
 	"github.com/getsentry/sentry-go"
 	"github.com/gorilla/handlers"
@@ -54,14 +54,15 @@ func main() {
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 	)
 
-	// Inicia servidor HTTP
-	// log.Println("Servidor rodando na porta 8080...")
-	// log.Fatal(http.ListenAndServe(":8080", cors(router)))
 
-	// Define a porta do servidor e inicia
+
+	// Define a porta do servidor
 	port := ":8080"
-	fmt.Printf("Servidor rodando em http://localhost%s\n", port)
-	if err := http.ListenAndServe(port, nil); err != nil {
-		fmt.Printf("Erro ao iniciar servidor: %v\n", err)
+
+	// Inicia o servidor com CORS
+	// Precisa incluir router no cors cors(router)
+	log.Printf("Servidor rodando em http://localhost%s\n", port)
+	if err := http.ListenAndServe(port, cors(http.DefaultServeMux)); err != nil {
+		log.Printf("Erro ao iniciar servidor: %v\n", err)
 	}
 }

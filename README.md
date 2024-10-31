@@ -62,10 +62,17 @@ SMTP_PASSWORD=
 
 ### Configurando Docker
 
+Pré configuração:
+
+```shell
+go mod init backend-golang
+go mod tidy
+```
+
 Criando a imagem:
 
 ```shell
-docker-compose up -d
+docker-compose up
 ```
 
 Para verificar (listagem containers):
