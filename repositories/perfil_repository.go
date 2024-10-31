@@ -48,7 +48,7 @@ func (ur *PerfilRepositorio) CriarPerfil(perfil *models.Perfil) (*models.Perfil,
 		log.Println(err)
 		return nil, err
 	}
-	log.Println("Perfil criado com sucesso!")
+
 	return perfil, nil
 }
 

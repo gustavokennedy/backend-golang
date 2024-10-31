@@ -1,14 +1,16 @@
 package main
 
 import (
+	"backend-golang/database"
+	"backend-golang/database/seeders"
+	"backend-golang/routes"
+	"fmt"
 	"io"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"time"
-
-	"backend-golang/database"
-	"backend-golang/routes"
 
 	"github.com/getsentry/sentry-go"
 	"github.com/gorilla/handlers"
@@ -75,12 +77,40 @@ func main() {
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 	)
 
+	// Configuração dos repositórios
+	perfilRepo := seeders.ConfiguraRepositorios()
+
+	// Criação das Seeders
+	seeders.SeedPerfis(&perfilRepo)
+
+	// Obtém o IP local
+	ip, err := getLocalIP()
+	if err != nil {
+		log.Fatalf("Erro ao obter o IP local: %v", err)
+	}
+
 	// Define a porta do servidor
 	port := ":8080"
+	address := fmt.Sprintf("%s%s", ip, port)
 
 	// Inicia o servidor com CORS
-	log.Printf("Servidor rodando em http://localhost%s\n", port)
-	if err := http.ListenAndServe(port, cors(router)); err != nil {
+	log.Printf("🟢 Servidor rodando em http://%s\n", address)
+	if err := http.ListenAndServe(address, cors(router)); err != nil {
 		log.Printf("Erro ao iniciar servidor: %v\n", err)
 	}
+}
+
+func getLocalIP() (string, error) {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return "", err
+	}
+
+	for _, addr := range addrs {
+		if ipNet, ok := addr.(*net.IPNet); ok && !ipNet.IP.IsLoopback() && ipNet.IP.To4() != nil {
+			return ipNet.IP.String(), nil
+		}
+	}
+
+	return "", fmt.Errorf("não foi possível encontrar o IP local")
 }
