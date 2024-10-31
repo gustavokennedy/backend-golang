@@ -58,6 +58,11 @@ SMTP_USERNAME=contato@overall.cloud
 SMTP_PASSWORD=
 ```
 
+Importante definir variaveis de ambiente com console. Exemplo:
+
+```shell
+export DB_URL="mongodb://mongo:27017"
+```
 
 ## Ambiente de Desenvolvimento
 
