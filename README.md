@@ -66,6 +66,8 @@ export DB_URL="mongodb://mongo:27017"
 
 ## Ambiente de Desenvolvimento
 
+[Quick Start do GoReleaser.](https://goreleaser.com/quick-start/)
+
 ### Configurando Docker
 
 Pré configuração:
