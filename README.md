@@ -4,16 +4,16 @@ Repositório padrão para projetos Backend usando Golang.
 
 #### 📁 Estrutura
 
-- [-] Pastas
-- [-] Docker
-- [-] Logs
-- [-] Versionamento
+- [x] Pastas
+- [x] Docker
+- [x] Logs
+- [x] Versionamento
 
 #### 🛢️ Banco de Dados
 
-- [-] MongoDB
+- [x] MongoDB
 - [ ] Migrations
-- [-] Seeders
+- [x] Seeders
 
 #### 🔐 Autenticação
 
@@ -27,7 +27,7 @@ Repositório padrão para projetos Backend usando Golang.
 
 #### 🛠️ CRUD
 
-- [-] Perfil
+- [x] Perfil
 - [ ] Usuários
 
 #### 🛒 Compras
