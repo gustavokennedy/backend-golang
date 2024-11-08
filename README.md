@@ -18,6 +18,7 @@ Repositório padrão para projetos Backend usando Golang.
 #### 🔐 Autenticação
 
 - [ ] JWT
+- [ ] SSO GOV.BR
 - [ ] SSO Google
 
 #### 📧 SMTP
