@@ -14,9 +14,15 @@ import (
 
 	"github.com/getsentry/sentry-go"
 	"github.com/gorilla/handlers"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	// Carrega as variáveis de ambiente do arquivo .env
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Erro ao carregar o arquivo .env")
+	}
+
 	// Configurações do MongoDB
 	dbURL := os.Getenv("DB_URL")
 	dbName := os.Getenv("DB_NAME")
@@ -67,6 +73,12 @@ func main() {
 	}
 	defer sentry.Flush(2 * time.Second)
 
+	// Configura os repositórios
+	perfilRepo := seeders.ConfiguraRepositorios()
+
+	// Executa o seeder para perfis e usuários
+	seeders.SeedPerfis(&perfilRepo)
+
 	// Cria um roteador principal com Mux
 	router := routes.ConfiguraRotas(client)
 
@@ -76,12 +88,6 @@ func main() {
 		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"}),
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 	)
-
-	// Configuração dos repositórios
-	perfilRepo := seeders.ConfiguraRepositorios()
-
-	// Criação das Seeders
-	seeders.SeedPerfis(&perfilRepo)
 
 	// Obtém o IP local
 	ip, err := getLocalIP()
