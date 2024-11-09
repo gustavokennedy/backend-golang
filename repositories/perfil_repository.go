@@ -18,6 +18,32 @@ type PerfilRepositorio struct {
 	db *mongo.Database
 }
 
+// Busca um perfil pelo nome
+func (repo *PerfilRepositorio) BuscarPerfilPorNome(nome string) (*models.Perfil, error) {
+	var perfil models.Perfil
+
+	// Obtém a coleção de perfis
+	collection := repo.db.Collection("perfis")
+
+	// Filtro para buscar o perfil pelo nome
+	filter := bson.M{"nome": nome}
+
+	// Realiza a busca no banco
+	err := collection.FindOne(context.Background(), filter).Decode(&perfil)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			// Caso não encontre o perfil, retorna nil
+			log.Printf("Perfil '%s' não encontrado.", nome)
+			return nil, nil
+		}
+		log.Println("Erro ao buscar perfil por nome:", err)
+		return nil, err
+	}
+
+	// Retorna o perfil encontrado
+	return &perfil, nil
+}
+
 // Criar Perfil
 
 func NovoPerfilRepositorio(dbURL, dbName string) (*PerfilRepositorio, error) {

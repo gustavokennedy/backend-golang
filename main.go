@@ -74,10 +74,10 @@ func main() {
 	defer sentry.Flush(2 * time.Second)
 
 	// Configura os repositórios
-	perfilRepo := seeders.ConfiguraRepositorios()
+	usuarioRepo, perfilRepo := seeders.ConfiguraRepositorios()
 
 	// Executa o seeder para perfis e usuários
-	seeders.SeedPerfis(&perfilRepo)
+	seeders.SeedUsuarios(&usuarioRepo, &perfilRepo)
 
 	// Cria um roteador principal com Mux
 	router := routes.ConfiguraRotas(client)
